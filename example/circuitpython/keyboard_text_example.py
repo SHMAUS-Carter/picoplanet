@@ -7,16 +7,18 @@ import board
 import touchio
 import pulseio
 from digitalio import DigitalInOut, Direction, Pull
+#import usb_hid #uncomment if keyboard library is installed
 
-import usb_hid
-#consumer_control
-from adafruit_hid.consumer_control import ConsumerControl
-from adafruit_hid.consumer_control_code import ConsumerControlCode
+#consumer_control 
+
+#from adafruit_hid.consumer_control import ConsumerControl #uncomment if keyboard library is installed
+#from adafruit_hid.consumer_control_code import ConsumerControlCode #uncomment if keyboard library is installed
 
 #keyboard
-from adafruit_hid.keyboard import Keyboard
-from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS
-from adafruit_hid.keycode import Keycode
+
+#from adafruit_hid.keyboard import Keyboard #uncomment if keyboard library is installed
+#from adafruit_hid.keyboard_layout_us import KeyboardLayoutUS #uncomment if keyboard library is installed
+#from adafruit_hid.keycode import Keycode #uncomment if keyboard library is installed
 
 #init touch buttons
 touch1 = touchio.TouchIn(board.A0)
@@ -32,16 +34,18 @@ ledB = DigitalInOut(board.D7)
 ledB.direction = Direction.OUTPUT
 
 #uncomment these if keyboard library is installed. See top comment
-time.sleep(1)  # Sleep for a bit to avoid a race condition on some systems
-cc = ConsumerControl(usb_hid.devices)
+#consumer control
+#time.sleep(1)  # Sleep for a bit to avoid a race condition on some systems
+#cc = ConsumerControl(usb_hid.devices)
 
- 
+#uncomment these if keyboard library is installed. See top comment
 # the keyboard object!
 # sleep for a bit to avoid a race condition on some systems
-time.sleep(1)
-kbd = Keyboard(usb_hid.devices)
+#time.sleep(1)
+#kbd = Keyboard(usb_hid.devices)
+
 # we're americans :)
-layout = KeyboardLayoutUS(kbd)
+#layout = KeyboardLayoutUS(kbd)
 
 print("starting...")
 #important: LED is active when False!
@@ -52,8 +56,8 @@ while True:
     if touch1.raw_value > 2500:
         print(touch1.raw_value)
         #cc.send(ConsumerControlCode.VOLUME_INCREMENT) #uncomment if keyboard library is installed
-        #layout.write("Hello World!\n")
-        kbd.send(Keycode.LEFT_CONTROL, Keycode.S)
+        #layout.write("Hello World!\n") #uncomment if keyboard library is installed
+        #kbd.send(Keycode.LEFT_CONTROL, Keycode.S) #uncomment if keyboard library is installed
         ledR.value = False
         time.sleep(0.2)
     else:
@@ -65,8 +69,8 @@ while True:
         print(touch2.raw_value)
         #cc.send(ConsumerControlCode.VOLUME_DECREMENT)  #uncomment if keyboard library is installed
         #kbd.send(Keycode.LEFT_CONTROL, Keycode.SHIFT, Keycode.ESCAPE)
-        #layout.write("Hello World!\n")
-        kbd.send(Keycode.LEFT_CONTROL, Keycode.V)
+        #layout.write("Hello World!\n") #uncomment if keyboard library is installed
+        #kbd.send(Keycode.LEFT_CONTROL, Keycode.V) #uncomment if keyboard library is installed
         ledG.value = False
         time.sleep(0.2)
     else:
@@ -76,9 +80,9 @@ while True:
     if touch3.raw_value > 2500:
         print(touch3.raw_value)
         #cc.send(ConsumerControlCode.MUTE)  #uncomment if keyboard library is installed
-        #kbd.send(Keycode.LEFT_CONTROL, Keycode.SHIFT, Keycode.ESCAPE)
-        #layout.write("Hello World!\n")
-        kbd.send(Keycode.LEFT_CONTROL, Keycode.C)
+        #kbd.send(Keycode.LEFT_CONTROL, Keycode.SHIFT, Keycode.ESCAPE) #uncomment if keyboard library is installed
+        #layout.write("Hello World!\n") #uncomment if keyboard library is installed
+        #kbd.send(Keycode.LEFT_CONTROL, Keycode.C) #uncomment if keyboard library is installed
         ledB.value = False
         time.sleep(0.2)
     else:
